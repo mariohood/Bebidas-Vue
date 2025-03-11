@@ -14,6 +14,7 @@ export const useBebidasStore = defineStore('bebidas', () => {
   })
 
   const recetas = ref([])
+  const receta = ref ({})
 
   onMounted(async function() {
     const {data: {drinks} }= await APIService.obtenerCategorias()
@@ -27,7 +28,7 @@ export const useBebidasStore = defineStore('bebidas', () => {
 
   async function seleccionarBebida(id) {
     const { data: {drinks}} = await APIService.buscarReceta(id)
-    console.log(drinks[0]) 
+    receta.value = drinks[0]
 
     modal.handleClickModal()
   }
@@ -37,6 +38,7 @@ export const useBebidasStore = defineStore('bebidas', () => {
     busqueda,
     obtenerRecetas,
     recetas,
-    seleccionarBebida
+    seleccionarBebida,
+    receta
   }
 })
